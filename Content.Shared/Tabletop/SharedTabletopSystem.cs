@@ -59,7 +59,16 @@ namespace Content.Shared.Tabletop
             // Move the entity and dirty it (we use the map ID from the entity so noone can try to be funny and move the item to another map)
             var transform = EntityManager.GetComponent<TransformComponent>(moved);
             Transforms.SetParent(moved, transform, _mapMan.GetMapEntityId(transform.MapID));
-            Transforms.SetLocalPositionNoLerp(transform, msg.Coordinates.Position);
+
+
+            // Changing this section, where instead of setting the piece down at the specified location, we instead are going to query if there is a grid to snap to with the new TabletopSnapComponent, and if so, snap the held piece to that grid
+            var pos = msg.Coordinates.Position;
+            // TEMP: hardcoded grid size (adjust later)
+            float gridSize = 0.5f;
+
+            pos.X = MathF.Round(pos.X / gridSize) * gridSize;
+            pos.Y = MathF.Round(pos.Y / gridSize) * gridSize;
+            Transforms.SetLocalPositionNoLerp(transform, pos);
         }
 
         private void OnDraggingPlayerChanged(TabletopDraggingPlayerChangedEvent msg, EntitySessionEventArgs args)
