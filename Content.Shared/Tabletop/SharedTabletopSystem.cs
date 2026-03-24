@@ -25,6 +25,7 @@ using Content.Shared.Tabletop.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
+using Shared._Funkystation.Tabletop.Components;
 
 namespace Content.Shared.Tabletop
 {
@@ -64,11 +65,13 @@ namespace Content.Shared.Tabletop
             // Changing this section, where instead of setting the piece down at the specified location, we instead are going to query if there is a grid to snap to with the new TabletopSnapComponent, and if so, snap the held piece to that grid
             var pos = msg.Coordinates.Position;
             // TEMP: hardcoded grid size (adjust later)
-            float gridSize = 0.5f;
+            if (TryComp<TabletopSnapComponent>(moved, out var snap))
+            {
+                var gridSize = snap.GridSize;
 
-            pos.X = MathF.Round(pos.X / gridSize) * gridSize;
-            pos.Y = MathF.Round(pos.Y / gridSize) * gridSize;
-            Transforms.SetLocalPositionNoLerp(transform, pos);
+                pos.X = MathF.Round(pos.X / gridSize) * gridSize;
+                pos.Y = MathF.Round(pos.Y / gridSize) * gridSize;
+            }
         }
 
         private void OnDraggingPlayerChanged(TabletopDraggingPlayerChangedEvent msg, EntitySessionEventArgs args)
