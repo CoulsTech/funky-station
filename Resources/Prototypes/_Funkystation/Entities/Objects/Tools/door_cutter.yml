@@ -1,0 +1,14 @@
+type: entity
+name: Security Door Cutter
+parent: BaseItem
+id: DoorCutter
+description: "TODO"
+components:
+- type: DoorCutterComponent
+  RequiresFuel: true
+  RequiresToggle: true
+  FuelConsumptionModifier: 1.0
+
+  #Taken from the welder .yml
+- type: RequiresEyeProtection
+- type: ItemTogglePointLight
