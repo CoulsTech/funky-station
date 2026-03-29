@@ -150,7 +150,7 @@
       collection: Welder
     qualities: Welding
   - type: WeldingSparks
-  - type: Welder
+  #- type: Welder
   - type: PointLight
     enabled: false
     radius: 1.5
@@ -189,6 +189,12 @@
   - type: Tag
     tags:
     - WeldingTool
+  # add component to welder to test new functionality inside testbed
+  - type: DoorCutterComponent
+    requiresFuel: true
+    requiresToggle: true
+    cutTime: 3.0
+    validTargetTag: CuttableDoor
 
 - type: entity
   name: industrial welding tool
