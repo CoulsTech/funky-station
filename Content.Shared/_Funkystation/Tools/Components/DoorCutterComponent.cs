@@ -1,7 +1,10 @@
-namespace Content.Shared._Funkystation.Tools.Components;
-
-public sealed class DoorCutterComponent
+namespace Content.Shared._Funkystation.Tools.Components
 {
-    public float CutTime = 3.0f;
-    public string ValidTargetTag = "CuttableDoor";
+    [RegisterComponent]
+    public sealed partial class DoorCutterComponent : Component
+    {
+        public string Name => "DoorCutter";
+        public float CutTime = 3.0f;
+        public string ValidTargetTag = "CuttableDoor";
+    }
 }

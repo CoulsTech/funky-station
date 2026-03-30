@@ -82,6 +82,7 @@
         acts: ["Destruction"]
   - type: Occluder
   - type: BlockWeather
+  - type: CuttableDoor
 
 - type: entity
   parent: BaseMaterialDoor
